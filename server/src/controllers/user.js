@@ -18,6 +18,11 @@ const registerUser = async (req, res) => {
   }
 }
 
+const detailUser = async (req, res) => {
+  return res.status(200).json(req.loggedInUser)
+}
+
 module.exports = {
-  registerUser
+  registerUser,
+  detailUser
 }
