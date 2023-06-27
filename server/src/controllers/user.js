@@ -53,7 +53,6 @@ const updateUser = async (req, res) => {
       .returning('*')
     return res.status(200).json(updatedUser[0])
   } catch (error) {
-    console.log(error)
     return res.status(500).json({ message: internalServerError })
   }
 }
