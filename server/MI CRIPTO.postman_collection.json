@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "401eb12b-bc33-42fd-98de-496849798b0a",
+		"name": "MI CRIPTO",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28123917"
+	},
+	"item": [
+		{
+			"name": "REGISTRAR USUARIO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Paulo\",\r\n    \"email\": \"paulo@hotmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BACK_DEPLOY}}/user",
+					"host": [
+						"{{URL_BACK_DEPLOY}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACTUALIZAR USUARIO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg3ODk3MzQwLCJleHAiOjE2ODc5MjYxNDB9.FqBSFr2eMnLl_3aJJLIZEfGvbsjPJLzn9Vdwm77aAOg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Mirian",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "mirian@hotmail.com",
+							"type": "text"
+						},
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/miria/Downloads/avatar-d.jpg"
+						},
+						{
+							"key": "description",
+							"value": "fdsfdsfsfsdf",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "{{URL_BACK_DEPLOY}}/user",
+					"host": [
+						"{{URL_BACK_DEPLOY}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ACCESO DE USUARIO",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"mirian@hotmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL_BACK_DEPLOY}}/login",
+					"host": [
+						"{{URL_BACK_DEPLOY}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DETALLE DEL USUARIO",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg3ODk3MzQwLCJleHAiOjE2ODc5MjYxNDB9.FqBSFr2eMnLl_3aJJLIZEfGvbsjPJLzn9Vdwm77aAOg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_BACK_DEPLOY}}/user",
+					"host": [
+						"{{URL_BACK_DEPLOY}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LISTA DE CRIPTOS",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg3ODk3MzQwLCJleHAiOjE2ODc5MjYxNDB9.FqBSFr2eMnLl_3aJJLIZEfGvbsjPJLzn9Vdwm77aAOg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL_BACK_DEPLOY}}/crypto?name=bit",
+					"host": [
+						"{{URL_BACK_DEPLOY}}"
+					],
+					"path": [
+						"crypto"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "bit"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg3ODY5MjM5LCJleHAiOjE2ODc4OTgwMzl9.bl3EGqTbuDaZtA-WyRAWI9naREXWeA0vhI2KjqnY8E0",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL_BACK_DEPLOY",
+			"value": "https://mi-cripto.vercel.app/",
+			"type": "string"
+		}
+	]
+}
