@@ -13,6 +13,6 @@ routes.post('/login', validateBody(loginSchema), login)
 routes.post('/user', validateBody(registerUserSchema), registerUser)
 routes.use(validateLogin)
 routes.get('/user', detailUser)
-routes.put('/user/:idUser', multer.single('avatar'), validateBody(updateUserSchema), updateUser)
+routes.put('/user', multer.single('avatar'), validateBody(updateUserSchema), updateUser)
 
 module.exports = routes
