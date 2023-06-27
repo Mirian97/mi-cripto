@@ -5,14 +5,14 @@ const { internalServerError, unauthorizedUser } = require('../utils/requestMessa
 const validateLogin = async (req, res, next) => {
   const { authorization } = req.headers
   if (!authorization) {
-    return res.status(401).json({ mensagem: unauthorizedUser })
+    return res.status(401).json({ message: unauthorizedUser })
   }
   try {
     const token = authorization.split(' ')[1]
     const { id } = jwt.verify(token, process.env.JWT_PASSWORD)
     const loggedInUser = await knex('users').where({ id }).first()
     if (!loggedInUser) {
-      return res.status(401).json({ mensagem: unauthorizedUser })
+      return res.status(401).json({ message: unauthorizedUser })
     }
     const { password: _, ...userData } = loggedInUser
     req.loggedInUser = userData
