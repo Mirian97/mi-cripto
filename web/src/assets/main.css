@@ -1,51 +1,38 @@
 @import './base.css';
 
+button {
+  cursor: pointer;
+}
+
 input {
+  border: none;
   cursor: pointer;
 }
 
 .v-field {
-  background: none;
   border-radius: 35px;
   background-color: rgba(255, 255, 255, 0.15);
-}
-
-.v-field__field {
   color: var(--vt-c-white);
   letter-spacing: 1px;
-  max-height: 60px;
-  border-radius: 35px;
 }
 
 .v-text-field label {
-  font-size: 1.5rem;
+  font-size: 15px;
 }
 
-.button-primary {
-  background-color: var(--primary-color);
-  border-radius: 200px;
-  color: var(--vt-c-white);
-  font-size: 1.8rem;
-  justify-self: center;
-  min-height: 50px;
-  width: 100%;
+.v-messages {
+  flex: none;
 }
 
-.text-link {
-  font-size: 1.6rem;
-  text-align: center;
-  margin: 16px auto;
+.main-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  width: 450px;
 }
 
-.button-link {
-  color: var(--primary-color);
-}
-
-.v-icon {
-  color: var(--vt-c-white);
-}
-
-.mdi-eye-off,
-.mdi-eye {
-  cursor: pointer;
+@media (max-width: 768px) {
+  .main-form {
+    width: 100%;
+  }
 }
