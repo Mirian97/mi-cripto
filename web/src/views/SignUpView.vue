@@ -45,8 +45,8 @@ export default {
       try {
         await registerUser(submitValues)
         messageSuccess('Usuario registrado')
-        this.resetValidation()
         this.reset()
+        this.navigateToLogin()
       } catch (error) {
         messageError(error.response.data.message)
       }
@@ -54,8 +54,10 @@ export default {
     reset() {
       this.$refs.form.reset()
     },
-    resetValidation() {
-      this.$refs.form.resetValidation()
+    navigateToLogin() {
+      setTimeout(() => {
+        this.$router.push('/')
+      }, 2000)
     }
   }
 }
