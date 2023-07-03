@@ -2,22 +2,23 @@
 import { toRefs } from 'vue'
 import { RouterLink } from 'vue-router'
 
-const props = defineProps(['auxialiaryText, linkText', 'to'])
-const { auxialiaryText, linkText, to } = toRefs(props)
+const props = defineProps(['helperText', 'linkText', 'to'])
+const { helperText, linkText, to } = toRefs(props)
 </script>
 
 <template>
   <p class="text-link">
-    {{ auxialiaryText }}
+    {{ helperText }}
     <RouterLink :to="to" class="button-link">{{ linkText }}</RouterLink>
   </p>
 </template>
 
-<style scoped>
+<style>
 .text-link {
+  color: var(--vt-c-white);
   font-size: 16px;
-  text-align: center;
   margin: 16px auto;
+  text-align: center;
 }
 
 .button-link {
