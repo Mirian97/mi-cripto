@@ -3,6 +3,7 @@ import Button from '../components/Button.vue'
 import CustomLink from '../components/CustomLink.vue'
 import MainLayout from '../layouts/MainLayout.vue'
 import { login } from '../services/user'
+import { useUserStore } from '../stores/user'
 import { passwords, togglePassword } from '../utils/password'
 import { messageError } from '../utils/toast'
 import {
@@ -15,6 +16,7 @@ import {
 <script>
 export default {
   data: () => ({
+    userStore: useUserStore(),
     email: '',
     password: '',
     emailRules: [validateFieldRequired, validateEmail],
@@ -30,21 +32,16 @@ export default {
     async submit() {
       const submitValues = { email: this.email, password: this.password }
       try {
-        const result = await login(submitValues)
-        console.log(result)
+        const { token, ...restResult } = await login(submitValues)
         this.reset()
-        this.navigateToAccount()
+        this.userStore.setUser(restResult)
+        this.userStore.setToken(token)
       } catch (error) {
         messageError(error.response.data.message)
       }
     },
     reset() {
       this.$refs.form.reset()
-    },
-    navigateToAccount() {
-      setTimeout(() => {
-        this.$router.push('/cuenta')
-      }, 2000)
     }
   }
 }
