@@ -5,7 +5,9 @@ export const registerUser = async (body) =>
     ...body
   })
 
-export async function login(email, password) {
-  const { data } = await api.post('/login', { email, password })
+export async function login(body) {
+  const { data } = await api.post('/login', {
+    ...body
+  })
   return data
 }
