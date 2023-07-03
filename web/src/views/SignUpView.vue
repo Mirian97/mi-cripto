@@ -86,8 +86,8 @@ export default {
           variant="solo-inverted"
           required
           @click:append-inner="togglePassword('password')"
-          :type="passwords.password ? 'password' : 'text'"
-          :append-inner-icon="passwords.password ? 'mdi-eye-off' : 'mdi-eye'"
+          :type="passwords.password ? 'text' : 'password'"
+          :append-inner-icon="passwords.password ? 'mdi-eye' : 'mdi-eye-off'"
           maxLength="50"
           v-model.trim="password"
           :rules="passwordRules"
@@ -97,14 +97,14 @@ export default {
           variant="solo-inverted"
           required
           @click:append-inner="togglePassword('repeatPassword')"
-          :type="passwords.repeatPassword ? 'password' : 'text'"
-          :append-inner-icon="passwords.repeatPassword ? 'mdi-eye-off' : 'mdi-eye'"
+          :type="passwords.repeatPassword ? 'text' : 'password'"
+          :append-inner-icon="passwords.repeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
           maxLength="50"
           v-model.trim="repeatPassword"
           :rules="repeatPasswordRules"
         />
         <Button type="submit"><template #button-text>Crear</template></Button>
-        <CustomLink auxialiryText="¿Ya tienes una cuenta?" linkText="Clic aquí." to="/" />
+        <CustomLink helperText="¿Ya tienes una cuenta?" linkText="Clic aquí." to="/" />
       </v-form>
     </template>
   </MainLayout>
