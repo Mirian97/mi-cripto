@@ -45,8 +45,8 @@ export default {
       try {
         await registerUser(submitValues)
         messageSuccess('Usuario registrado')
-        this.resetValidation()
         this.reset()
+        this.navigateToLogin()
       } catch (error) {
         messageError(error.response.data.message)
       }
@@ -54,8 +54,10 @@ export default {
     reset() {
       this.$refs.form.reset()
     },
-    resetValidation() {
-      this.$refs.form.resetValidation()
+    navigateToLogin() {
+      setTimeout(() => {
+        this.$router.push('/')
+      }, 2000)
     }
   }
 }
@@ -85,9 +87,9 @@ export default {
           label="Contraseña *"
           variant="solo-inverted"
           required
-          @click:append-inner="togglePassword('password')"
-          :type="passwords.password ? 'password' : 'text'"
-          :append-inner-icon="passwords.password ? 'mdi-eye-off' : 'mdi-eye'"
+          @click:append-inner="togglePassword('showPassword')"
+          :type="passwords.showPassword ? 'text' : 'password'"
+          :append-inner-icon="passwords.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           maxLength="50"
           v-model.trim="password"
           :rules="passwordRules"
@@ -96,15 +98,15 @@ export default {
           label="Repita la contraseña *"
           variant="solo-inverted"
           required
-          @click:append-inner="togglePassword('repeatPassword')"
-          :type="passwords.repeatPassword ? 'password' : 'text'"
-          :append-inner-icon="passwords.repeatPassword ? 'mdi-eye-off' : 'mdi-eye'"
+          @click:append-inner="togglePassword('showRepeatPassword')"
+          :type="passwords.showRepeatPassword ? 'text' : 'password'"
+          :append-inner-icon="passwords.showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
           maxLength="50"
           v-model.trim="repeatPassword"
           :rules="repeatPasswordRules"
         />
         <Button type="submit"><template #button-text>Crear</template></Button>
-        <CustomLink auxialiryText="¿Ya tienes una cuenta?" linkText="Clic aquí." to="/" />
+        <CustomLink helperText="¿Ya tienes una cuenta?" linkText="Clic aquí." to="/" />
       </v-form>
     </template>
   </MainLayout>
