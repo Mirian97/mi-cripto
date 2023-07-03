@@ -2,7 +2,7 @@
 import Button from '../components/Button.vue'
 import CustomLink from '../components/CustomLink.vue'
 import MainLayout from '../layouts/MainLayout.vue'
-import { registerUser } from '../services/user'
+import { login } from '../services/user'
 import { passwords, togglePassword } from '../utils/password'
 import { messageError } from '../utils/toast'
 import {
@@ -28,11 +28,12 @@ export default {
       }
     },
     async submit() {
-      const submitValues = { name: this.name, email: this.email }
+      const submitValues = { email: this.email, password: this.password }
       try {
-        await registerUser(submitValues)
-        this.resetValidation()
+        const result = await login(submitValues)
+        console.log(result)
         this.reset()
+        this.navigateToAccount()
       } catch (error) {
         messageError(error.response.data.message)
       }
@@ -40,8 +41,10 @@ export default {
     reset() {
       this.$refs.form.reset()
     },
-    resetValidation() {
-      this.$refs.form.resetValidation()
+    navigateToAccount() {
+      setTimeout(() => {
+        this.$router.push('/cuenta')
+      }, 2000)
     }
   }
 }
