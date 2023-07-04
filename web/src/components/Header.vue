@@ -33,6 +33,7 @@ const { removeUser } = useUserStore()
   padding: 20px 32px;
   position: sticky;
   top: 0;
+  z-index: 2;
 }
 
 .logo {
