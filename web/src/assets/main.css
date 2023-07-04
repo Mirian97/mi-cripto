@@ -36,6 +36,14 @@ input {
   flex-direction: row;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
 @media (max-width: 768px) {
   .main-form {
     width: 100%;
