@@ -1,9 +1,7 @@
 <script setup>
-import { useUserStore } from '../stores/user'
-const { removeUser } = useUserStore()
+import Header from '../components/Header.vue'
 </script>
 
 <template>
-  <h1>Cuenta principal</h1>
-  <button @click="removeUser">Logout</button>
+  <Header />
 </template>
