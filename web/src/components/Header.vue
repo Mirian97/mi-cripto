@@ -25,7 +25,7 @@ const { removeUser } = useUserStore()
 
 <style>
 .header {
-  background: var(--primary-color);
+  background-color: var(--primary-color);
   border-bottom-left-radius: 60px;
   border-bottom-right-radius: 60px;
   position: sticky;
