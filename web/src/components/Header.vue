@@ -8,15 +8,17 @@ const { removeUser } = useUserStore()
 
 <template>
   <header class="header">
-    <RouterLink class="flex-row logo" to="/cuenta">
-      <img :src="Logo" alt="Logo" />
-      <div class="flex-row">
-        <CustomTitle title="Mi" textColor="#f8eaaf" /><CustomTitle title="Cripto" />
+    <div class="header-content">
+      <RouterLink class="flex-row logo" to="/cuenta">
+        <img :src="Logo" alt="Logo" />
+        <div class="flex-row">
+          <CustomTitle title="Mi" textColor="#f8eaaf" /><CustomTitle title="Cripto" />
+        </div>
+      </RouterLink>
+      <div class="flex-row actions-buttons">
+        <v-btn icon="mdi-account-circle-outline" size="large" variant="text" />
+        <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
       </div>
-    </RouterLink>
-    <div class="flex-row actions-buttons">
-      <v-btn icon="mdi-account-circle-outline" size="large" variant="text" />
-      <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
     </div>
   </header>
 </template>
@@ -26,19 +28,25 @@ const { removeUser } = useUserStore()
   background: var(--primary-color);
   border-bottom-left-radius: 60px;
   border-bottom-right-radius: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 120px;
-  padding: 20px 32px;
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
+.header-content {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1410px;
+  min-height: 120px;
+  padding: 20px 32px;
+}
+
 .logo {
   text-decoration: none;
   color: var(--vt-c-white);
+  gap: 4px;
 }
 
 .actions-buttons i {
@@ -47,7 +55,7 @@ const { removeUser } = useUserStore()
 }
 
 @media screen and (max-width: 768px) {
-  .header {
+  .header-content {
     flex-direction: column;
     padding: 8px;
   }
