@@ -9,13 +9,13 @@ const { removeUser } = useUserStore()
 <template>
   <header class="header">
     <div class="header-content">
-      <RouterLink class="flex-row logo" to="/cuenta">
+      <RouterLink class="d-flex logo" to="/cuenta">
         <img :src="Logo" alt="Logo" />
-        <div class="flex-row">
+        <div class="d-flex">
           <CustomTitle title="Mi" textColor="#f8eaaf" /><CustomTitle title="Cripto" />
         </div>
       </RouterLink>
-      <div class="flex-row actions-buttons">
+      <div class="d-flex actions-buttons">
         <v-btn icon="mdi-account-circle-outline" size="large" variant="text" />
         <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
       </div>
@@ -34,12 +34,12 @@ const { removeUser } = useUserStore()
 }
 
 .header-content {
-  margin: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   max-width: 1410px;
   min-height: 120px;
+  margin: auto;
   padding: 20px 32px;
 }
 
@@ -50,7 +50,6 @@ const { removeUser } = useUserStore()
 }
 
 .actions-buttons i {
-  cursor: pointer;
   font-size: 36px;
 }
 
