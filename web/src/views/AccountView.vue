@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import Spinner from '../assets/spinner.svg'
 import CryptoCard from '../components/CryptoCard.vue'
+import CryptoModal from '../components/CryptoModal.vue'
 import Header from '../components/Header.vue'
 import { listCrypto } from '../services/crypto'
 import { useUserStore } from '../stores/user'
@@ -31,6 +32,7 @@ onMounted(() => handleListCryptos())
     />
     <img v-else :src="Spinner" alt="Cargando..." class="loading" />
   </div>
+  <CryptoModal />
 </template>
 
 <style>
