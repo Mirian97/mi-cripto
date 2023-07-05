@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const knex = require('../configs/connection')
-const { internalServerError, unauthorizedUser } = require('../utils/requestMessages')
+const { unauthorizedUser, sessionExpired } = require('../utils/requestMessages')
 
 const validateLogin = async (req, res, next) => {
   const { authorization } = req.headers
@@ -18,7 +18,7 @@ const validateLogin = async (req, res, next) => {
     req.loggedInUser = userData
     next()
   } catch (error) {
-    return res.status(500).json({ message: internalServerError })
+    return res.status(401).json({ message: sessionExpired })
   }
 }
 
