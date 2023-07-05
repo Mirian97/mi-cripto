@@ -26,5 +26,5 @@ export const useUserStore = defineStore('user', () => {
       router.push('/cuenta')
     }
   })
-  return { user, setUser, setToken, removeUser, isAuthenticated }
+  return { user, token, setUser, setToken, removeUser, isAuthenticated }
 })
