@@ -15,7 +15,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: invalidEmailOrPassword })
     }
     const token = jwt.sign({ id: loggedUser.id }, process.env.JWT_PASSWORD, {
-      expiresIn: '8h'
+      expiresIn: '2h'
     })
     const { password: _password, avatar: _avatar, ...userData } = loggedUser
     return res.status(200).json({ ...userData, token })
