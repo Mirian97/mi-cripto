@@ -12,6 +12,7 @@ import { messageError } from '../utils/toast'
 const { token } = useUserStore()
 const cryptos = ref([])
 const search = ref('')
+const loading = ref(true)
 const clearSearch = () => (search.value = '')
 
 const handleListCryptos = async () => {
@@ -20,6 +21,8 @@ const handleListCryptos = async () => {
     cryptos.value = result
   } catch (error) {
     messageError(error.response.data.message)
+  } finally {
+    loading.value = false
   }
 }
 watchEffect(() => {
@@ -44,13 +47,16 @@ onMounted(() => handleListCryptos())
     />
   </v-sheet>
   <div class="card-container">
+    <img v-if="loading" :src="Spinner" alt="Cargando..." class="loading" />
+    <p class="text-h6 text-center font-weight-bold" v-if="!cryptos.length && !loading">
+      No hay criptomonedas para el término buscado...
+    </p>
     <CryptoCard
-      v-if="cryptos.length"
+      v-if="cryptos.length && !loading"
       v-for="crypto in cryptos"
       :key="crypto.uuid"
       :crypto="crypto"
     />
-    <img v-else :src="Spinner" alt="Cargando..." class="loading" />
   </div>
   <CryptoModal />
 </template>
