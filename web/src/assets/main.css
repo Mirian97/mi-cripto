@@ -31,6 +31,10 @@ input {
   width: 450px;
 }
 
+.v-sheet {
+  background-color: var(--background-color);
+}
+
 @media (max-width: 768px) {
   .main-form {
     width: 100%;
