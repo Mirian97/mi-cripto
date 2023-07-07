@@ -3,6 +3,7 @@ import { RouterLink } from 'vue-router'
 import Logo from '../assets/logo.svg'
 import CustomTitle from '../components/CustomTitle.vue'
 import { useUserStore } from '../stores/user'
+import UserProfile from './UserProfile.vue'
 const { removeUser } = useUserStore()
 </script>
 
@@ -16,7 +17,7 @@ const { removeUser } = useUserStore()
         </div>
       </RouterLink>
       <div class="d-flex actions-buttons">
-        <v-btn icon="mdi-account-circle-outline" size="large" variant="text" />
+        <UserProfile />
         <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
       </div>
     </div>
