@@ -6,7 +6,7 @@ const { type } = toRefs(props)
 </script>
 
 <template>
-  <v-btn color="primary" rounded size="x-large" :type="type">
+  <v-btn color="primary" rounded size="x-large" :type="type" width="100%">
     <slot name="button-text" />
   </v-btn>
 </template>
