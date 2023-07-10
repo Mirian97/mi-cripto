@@ -1,11 +1,16 @@
 <script setup>
+import { storeToRefs } from 'pinia'
+import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import Logo from '../assets/logo.svg'
 import CustomTitle from '../components/CustomTitle.vue'
 import router from '../router'
 import { useUserStore } from '../stores/user'
+
 const { removeUser } = useUserStore()
+const { user } = storeToRefs(useUserStore())
 const navigateToProfile = () => router.push('/perfil')
+const showProfileButton = computed(() => router.currentRoute.value.path !== '/perfil')
 </script>
 
 <template>
@@ -17,8 +22,17 @@ const navigateToProfile = () => router.push('/perfil')
           <CustomTitle title="Mi" textColor="#f8eaaf" /><CustomTitle title="Cripto" />
         </div>
       </RouterLink>
-      <div class="d-flex actions-buttons">
-        <v-btn @click="navigateToProfile" icon="mdi-account-circle" size="large" variant="text" />
+      <div class="d-flex align-center actions-buttons">
+        <v-btn
+          @click="navigateToProfile"
+          v-if="showProfileButton"
+          size="large"
+          variant="text"
+          rounded
+        >
+          <v-avatar v-if="user?.avatar_url" :image="user.avatar_url" size="34" />
+          <v-icon v-else icon="mdi-account-circle" size="36" />
+        </v-btn>
         <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
       </div>
     </div>
