@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import AccountView from '../views/AccountView.vue'
 import LoginView from '../views/LoginView.vue'
+import ProfileView from '../views/ProfileView.vue'
 import SignUpView from '../views/SignUpView.vue'
 import { validateAuthRoutes } from './routes'
 
@@ -21,6 +22,14 @@ const router = createRouter({
       path: '/cuenta',
       name: 'cuenta',
       component: AccountView,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/perfil',
+      name: 'perfil',
+      component: ProfileView,
       meta: {
         requiresAuth: true
       }
