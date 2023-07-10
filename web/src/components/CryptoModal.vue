@@ -3,14 +3,11 @@ import { storeToRefs } from 'pinia'
 import { computed, watch } from 'vue'
 import { useCryptoStore } from '../stores/crypto'
 import { formatMoney, formatNumber } from '../utils/formatters'
+import toggleScroll from '../utils/toggleSroll'
 import ModalListItem from './ModalListItem.vue'
 import Sparkline from './Sparkline.vue'
 const { removeActiveCrypto } = useCryptoStore()
 const { showModal, activeCrypto } = storeToRefs(useCryptoStore())
-const toggleScroll = (showModal) => {
-  const html = document.querySelector('html')
-  html.style.overflow = showModal ? 'hidden' : 'auto'
-}
 const modalList = computed(() => [
   {
     id: 0,
