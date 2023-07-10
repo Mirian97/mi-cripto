@@ -17,6 +17,17 @@ export const getHeaders = (token) => {
   return Authorization
 }
 
+export const getFormDataHeaders = (token) => {
+  const headers = {
+    headers: {
+      authorization: `Bearer ${token}`,
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+  return headers
+}
+
 export const updateUser = async (token, body) => {
-  await api.put('/user', { ...body }, { ...getHeaders(token) })
+  const { data } = await api.put('/user', { ...body }, { ...getFormDataHeaders(token) })
+  return data
 }
