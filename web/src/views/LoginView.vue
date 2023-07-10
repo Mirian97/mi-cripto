@@ -36,6 +36,7 @@ export default {
         this.reset()
         this.userStore.setUser(restResult)
         this.userStore.setToken(token)
+        this.$router.push('/cuenta')
       } catch (error) {
         messageError(error.response.data.message)
       }

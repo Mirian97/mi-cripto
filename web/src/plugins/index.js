@@ -4,7 +4,6 @@ const myCustomTheme = {
   dark: true,
   colors: {
     background: '#001220',
-    surface: '#FFFFFF',
     primary: '#ee5007',
     secondary: '#FBAE3C',
     error: '#B00020',
