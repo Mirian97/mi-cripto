@@ -2,9 +2,10 @@
 import { RouterLink } from 'vue-router'
 import Logo from '../assets/logo.svg'
 import CustomTitle from '../components/CustomTitle.vue'
+import router from '../router'
 import { useUserStore } from '../stores/user'
-import UserProfile from './UserProfile.vue'
 const { removeUser } = useUserStore()
+const navigateToProfile = () => router.push('/perfil')
 </script>
 
 <template>
@@ -17,7 +18,7 @@ const { removeUser } = useUserStore()
         </div>
       </RouterLink>
       <div class="d-flex actions-buttons">
-        <UserProfile />
+        <v-btn @click="navigateToProfile" icon="mdi-account-circle" size="large" variant="text" />
         <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
       </div>
     </div>
