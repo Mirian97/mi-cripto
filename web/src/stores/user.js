@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 import router from '../router'
 
 export const useUserStore = defineStore('user', () => {
@@ -21,10 +21,12 @@ export const useUserStore = defineStore('user', () => {
     user.value = null
     router.push('/')
   }
-  watchEffect(() => {
-    if (isAuthenticated.value) {
-      router.push('/cuenta')
-    }
-  })
-  return { user, token, setUser, setToken, removeUser, isAuthenticated }
+  return {
+    user,
+    token,
+    setUser,
+    setToken,
+    removeUser,
+    isAuthenticated
+  }
 })
