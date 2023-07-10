@@ -4,7 +4,7 @@ import { onMounted, ref, watchEffect } from 'vue'
 import Spinner from '../assets/spinner.svg'
 import CryptoCard from '../components/CryptoCard.vue'
 import CryptoModal from '../components/CryptoModal.vue'
-import Header from '../components/Header.vue'
+import AuthLayout from '../layouts/AuthLayout.vue'
 import { listCrypto } from '../services/crypto'
 import { useUserStore } from '../stores/user'
 import { messageError } from '../utils/toast'
@@ -14,7 +14,6 @@ const cryptos = ref([])
 const search = ref('')
 const loading = ref(true)
 const clearSearch = () => (search.value = '')
-
 const handleListCryptos = async () => {
   try {
     const result = await listCrypto(token, search.value)
@@ -32,33 +31,37 @@ onMounted(() => handleListCryptos())
 </script>
 
 <template>
-  <Header />
-  <v-sheet max-width="400" class="mx-auto mt-8 px-5">
-    <v-text-field
-      label="Buscar una criptomoneda..."
-      variant="solo-inverted"
-      maxLength="50"
-      v-model="search"
-      prepend-inner-icon="mdi-magnify"
-      append-inner-icon="mdi-currency-usd"
-      clear-icon="mdi-close-circle"
-      clearable
-      @click:clear="clearSearch"
-    />
-  </v-sheet>
-  <div class="card-container">
-    <img v-if="loading" :src="Spinner" alt="Cargando..." class="loading" />
-    <p class="text-h6 text-center font-weight-bold" v-if="!cryptos.length && !loading">
-      No hay criptomonedas para el término buscado...
-    </p>
-    <CryptoCard
-      v-if="cryptos.length && !loading"
-      v-for="crypto in cryptos"
-      :key="crypto.uuid"
-      :crypto="crypto"
-    />
-  </div>
-  <CryptoModal />
+  <AuthLayout>
+    <template #content>
+      <div class="d-flex flex-column align-center justify-center">
+        <v-text-field
+          label="Buscar una criptomoneda..."
+          variant="solo-inverted"
+          maxLength="50"
+          v-model="search"
+          prepend-inner-icon="mdi-magnify"
+          append-inner-icon="mdi-currency-usd"
+          clear-icon="mdi-close-circle"
+          clearable
+          @click:clear="clearSearch"
+          class="search-input"
+        />
+        <div class="card-container">
+          <img v-if="loading" :src="Spinner" alt="Cargando..." class="loading" />
+          <p class="text-h6 text-center font-weight-bold" v-if="!cryptos.length && !loading">
+            No hay criptomonedas para el término buscado...
+          </p>
+          <CryptoCard
+            v-if="cryptos.length && !loading"
+            v-for="crypto in cryptos"
+            :key="crypto.uuid"
+            :crypto="crypto"
+          />
+        </div>
+        <CryptoModal />
+      </div>
+    </template>
+  </AuthLayout>
 </template>
 
 <style>
@@ -68,9 +71,12 @@ onMounted(() => handleListCryptos())
   align-items: center;
   justify-content: center;
   gap: 40px;
-  padding: 20px 20px 40px;
-  max-width: 1440px;
-  margin: auto;
+}
+
+.search-input {
+  width: 400px;
+  max-width: 100%;
+  padding: 32px 0 20px;
 }
 
 .loading {
