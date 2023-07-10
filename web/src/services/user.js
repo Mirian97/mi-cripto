@@ -16,3 +16,7 @@ export const getHeaders = (token) => {
   const Authorization = { headers: { authorization: `Bearer ${token}` } }
   return Authorization
 }
+
+export const updateUser = async (token, body) => {
+  await api.put('/user', { ...body }, { ...getHeaders(token) })
+}
