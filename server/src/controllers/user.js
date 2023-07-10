@@ -28,7 +28,7 @@ const detailUser = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-  const { id, avatar_path } = req.loggedInUser
+  const { id, avatar_path, avatar_url } = req.loggedInUser
   const { email, password } = req.body
   let image = null
   try {
@@ -40,14 +40,20 @@ const updateUser = async (req, res) => {
       const { originalname, mimetype, buffer } = req.file
       avatar_path && (await deleteImage(avatar_path))
       image = await uploadImage(`users/${id}/${originalname}`, buffer, mimetype)
+    } else {
+      image = {
+        path: avatar_path,
+        url: avatar_url
+      }
     }
     const encryptedPassword = await bcrypt.hash(password, saltOrRounds)
     const updatedUser = await knex('users')
       .update({
         ...req.body,
         password: encryptedPassword,
-        avatar_path: image ? image.path : null,
-        avatar_url: image ? image.url : null
+        avatar_path: image.path,
+        avatar_url: image.url,
+        description: req.body.description ?? null
       })
       .where({ id })
       .returning('*')
