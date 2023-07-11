@@ -4,3 +4,5 @@ export const passwordMinLength = 'La contraseña debe tener al menos 5 caractere
 export const passwordDoesntMatch = 'Las contraseñas no coinciden'
 export const sessionExpired = 'Sesión expirada, por favor haz nuevo login'
 export const descriptionMaxLength = 'La descripción debe tener menos 500 caracteres'
+export const imageMaxSize1MB = 'La imagen debe tener menos de 1 MB'
+export const invalidImageExtension = 'Solo son válidas las imágenes con extensión .jpg, .jpeg .png'
