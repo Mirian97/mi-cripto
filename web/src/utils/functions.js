@@ -1,4 +1,4 @@
-export function deleteEmptyProperties(obj) {
+export const deleteEmptyProperties = (obj) => {
   for (let prop in obj) {
     if (obj[prop] === '' || obj[prop] === null) {
       delete obj[prop]
@@ -6,3 +6,5 @@ export function deleteEmptyProperties(obj) {
   }
   return obj
 }
+
+export const filterUntrueItems = (array) => (array = array.filter((item) => item !== true))

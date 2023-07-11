@@ -71,6 +71,7 @@ onMounted(() => handleListCryptos())
   align-items: center;
   justify-content: center;
   gap: 40px;
+  width: 100%;
 }
 
 .search-input {
