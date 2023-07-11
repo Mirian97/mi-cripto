@@ -1,20 +1,26 @@
 <script setup>
 import { storeToRefs } from 'pinia'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import Button from '../components/Button.vue'
 import AuthLayout from '../layouts/AuthLayout.vue'
 import { updateUser } from '../services/user'
 import { useUserStore } from '../stores/user'
-import { deleteEmptyProperties } from '../utils/functions'
+import { deleteEmptyProperties, filterUntrueItems } from '../utils/functions'
 import { passwords, togglePassword } from '../utils/password'
 import { descriptionRules, emailRules, nameRules, passwordRules } from '../utils/rules'
 import { messageError, messageSuccess } from '../utils/toast'
-import { validateFieldRequired, validateMatchingPasswords } from '../utils/validations'
+import {
+  validateFieldRequired,
+  validateImageExtension,
+  validateImageSize,
+  validateMatchingPasswords
+} from '../utils/validations'
 
 const { setUser } = useUserStore()
 const { user, token } = storeToRefs(useUserStore())
 const form = ref(null)
 const avatarImage = ref('')
+const avatarError = ref([])
 const profileForm = ref({
   name: '',
   email: '',
@@ -35,11 +41,12 @@ const onChangeAvatar = (event) => {
   if (!file) return
   profileForm.value.avatar = file
   avatarImage.value = URL.createObjectURL(file)
+  avatarError.value = filterUntrueItems([validateImageSize(file), validateImageExtension(file)])
 }
 
 const validate = async () => {
   const { valid } = await form.value.validate()
-  if (!valid) return
+  if (!valid || avatarError.value.length) return
   await onSubmit()
 }
 
@@ -48,6 +55,7 @@ const onSubmit = async () => {
     const { repeatPassword, ...restProfileForm } = profileForm.value
     const submitValues = deleteEmptyProperties(restProfileForm)
     const result = await updateUser(token.value, submitValues)
+    form.value.reset()
     setUser(result)
     messageSuccess('Usuario editado')
   } catch (error) {
@@ -55,7 +63,7 @@ const onSubmit = async () => {
   }
 }
 
-onMounted(() => {
+watchEffect(() => {
   if (user.value) {
     profileForm.value.name = user.value.name
     profileForm.value.email = user.value.email
@@ -86,15 +94,19 @@ onMounted(() => {
       <v-form class="profile-form" ref="form" @submit.prevent="validate">
         <div class="content-form">
           <div class="column-form">
-            <label class="file-input mb-3">
+            <label class="file-input">
               <input type="file" v-on:change="onChangeAvatar" accept="image/*" />
               <v-avatar v-if="avatarImage" :image="avatarImage" size="112" class="form-avatar" />
               <v-icon v-else icon="mdi-account-circle" />
             </label>
+            <span
+              class="v-messages v-messages__message error-input-file"
+              :v-show="avatarError.length"
+              >{{ avatarError[0] }}</span
+            >
             <v-textarea
               label="Descripción"
               variant="solo-inverted"
-              class="flex-grow-1 flex-shrink-0"
               v-model.trim="profileForm.description"
               :rules="descriptionRules"
             />
@@ -185,6 +197,12 @@ onMounted(() => {
 
 .file-input input {
   display: none;
+}
+
+.error-input-file {
+  color: #ed323b;
+  font-weight: 500;
+  margin: 8px 16px 2px;
 }
 
 .form-avatar {
