@@ -1,33 +1,12 @@
 <script setup>
-import { debounce } from 'lodash'
-import { onMounted, ref, watchEffect } from 'vue'
+import { storeToRefs } from 'pinia'
 import Spinner from '../assets/spinner.svg'
 import CryptoCard from '../components/CryptoCard.vue'
 import CryptoModal from '../components/CryptoModal.vue'
 import AuthLayout from '../layouts/AuthLayout.vue'
-import { listCrypto } from '../services/crypto'
-import { useUserStore } from '../stores/user'
-import { messageError } from '../utils/toast'
-
-const { token } = useUserStore()
-const cryptos = ref([])
-const search = ref('')
-const loading = ref(true)
-const clearSearch = () => (search.value = '')
-const handleListCryptos = async () => {
-  try {
-    const result = await listCrypto(token, search.value)
-    cryptos.value = result
-  } catch (error) {
-    messageError(error.response.data.message)
-  } finally {
-    loading.value = false
-  }
-}
-watchEffect(() => {
-  search.value ? debounce(handleListCryptos, 500)() : handleListCryptos()
-})
-onMounted(() => handleListCryptos())
+import { useCryptoStore } from '../stores/crypto'
+const { cryptos, search, loading } = storeToRefs(useCryptoStore())
+const { clearSearch } = useCryptoStore()
 </script>
 
 <template>
