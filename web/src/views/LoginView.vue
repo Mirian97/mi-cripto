@@ -1,49 +1,36 @@
 <script setup>
+import { ref } from 'vue'
 import Button from '../components/Button.vue'
 import CustomLink from '../components/CustomLink.vue'
 import MainLayout from '../layouts/MainLayout.vue'
+import router from '../router'
 import { login } from '../services/user'
 import { useUserStore } from '../stores/user'
 import { passwords, togglePassword } from '../utils/password'
+import { emailRules, passwordRules } from '../utils/rules'
 import { messageError } from '../utils/toast'
-import {
-  validateEmail,
-  validateFieldRequired,
-  validatePasswordMinLength
-} from '../utils/validations'
-</script>
 
-<script>
-export default {
-  data: () => ({
-    userStore: useUserStore(),
-    email: '',
-    password: '',
-    emailRules: [validateFieldRequired, validateEmail],
-    passwordRules: [validateFieldRequired, validatePasswordMinLength]
-  }),
-  methods: {
-    async validate() {
-      const { valid } = await this.$refs.form.validate()
-      if (valid) {
-        await this.submit()
-      }
-    },
-    async submit() {
-      const submitValues = { email: this.email, password: this.password }
-      try {
-        const { token, ...restResult } = await login(submitValues)
-        this.reset()
-        this.userStore.setUser(restResult)
-        this.userStore.setToken(token)
-        this.$router.push('/cuenta')
-      } catch (error) {
-        messageError(error.response.data.message)
-      }
-    },
-    reset() {
-      this.$refs.form.reset()
-    }
+const { setUser, setToken } = useUserStore()
+const form = ref(null)
+const loginForm = ref({
+  email: '',
+  password: ''
+})
+const validate = async () => {
+  const { valid } = await form.value.validate()
+  if (!valid) return
+  await onSubmit()
+}
+const onSubmit = async () => {
+  try {
+    const data = await login(loginForm.value)
+    const { token, ...restData } = data
+    setUser(restData)
+    setToken(token)
+    router.push('/cuenta')
+    form.value.reset()
+  } catch (error) {
+    messageError(error.response?.data?.message)
   }
 }
 </script>
@@ -57,7 +44,7 @@ export default {
           variant="solo-inverted"
           required
           maxLength="50"
-          v-model.trim="email"
+          v-model.trim="loginForm.email"
           :rules="emailRules"
         />
         <v-text-field
@@ -68,7 +55,7 @@ export default {
           :type="passwords.showPassword ? 'text' : 'password'"
           :append-inner-icon="passwords.showPassword ? 'mdi-eye' : 'mdi-eye-off'"
           maxLength="50"
-          v-model.trim="password"
+          v-model.trim="loginForm.password"
           :rules="passwordRules"
         />
         <Button type="submit"><template #button-text>Ingresar</template></Button>

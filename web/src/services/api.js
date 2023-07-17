@@ -20,6 +20,8 @@ api.interceptors.response.use(
         userStore.removeUser()
         router.push('/')
       }, 2000)
+    } else {
+      return Promise.reject(error)
     }
   }
 )
