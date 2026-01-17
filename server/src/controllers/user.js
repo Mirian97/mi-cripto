@@ -19,6 +19,7 @@ const registerUser = async (req, res) => {
     await knex('users').insert({ name, email, password: encryptedPassword })
     return res.status(201).send()
   } catch (error) {
+    console.error(error)
     return res.status(500).json({ message: internalServerError })
   }
 }
