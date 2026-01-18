@@ -23,17 +23,13 @@ const showProfileButton = computed(() => router.currentRoute.value.path !== '/pe
         </div>
       </RouterLink>
       <div class="d-flex align-center actions-buttons">
-        <v-btn
-          @click="navigateToProfile"
-          v-if="showProfileButton"
-          size="large"
-          variant="text"
-          rounded
-        >
-          <v-avatar v-if="user?.avatar_url" :image="user.avatar_url" size="34" />
-          <v-icon v-else icon="mdi-account-circle" size="36" />
+        <v-btn @click="navigateToProfile" v-if="showProfileButton" variant rounded>
+          <v-avatar v-if="user?.avatar_url" :image="user.avatar_url" size="28" />
+          <v-icon v-else icon="mdi-account-circle" size="28" />
         </v-btn>
-        <v-btn @click="removeUser" icon="mdi-logout-variant" size="large" variant="text" />
+        <v-btn @click="removeUser" variant="text" rounded>
+          <v-icon icon="mdi-logout" size="28" />
+        </v-btn>
       </div>
     </div>
   </header>
@@ -63,10 +59,19 @@ const showProfileButton = computed(() => router.currentRoute.value.path !== '/pe
   text-decoration: none;
   color: var(--vt-c-white);
   gap: 4px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 44px;
+    max-width: 100%;
+  }
 }
 
-.actions-buttons i {
-  font-size: 36px;
+.actions-buttons {
+  button {
+    padding: 0 !important;
+  }
 }
 
 @media screen and (max-width: 768px) {

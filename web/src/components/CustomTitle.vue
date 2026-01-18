@@ -11,7 +11,7 @@ const { title, textColor } = toRefs(props)
 
 <style scoped>
 .title {
-  font-size: 40px;
+  font-size: 32px;
   font-family: 'Belanosima', sans-serif;
 }
 </style>
