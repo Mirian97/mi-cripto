@@ -6,7 +6,7 @@ const myCustomTheme = {
     background: '#001220',
     primary: '#ee5007',
     secondary: '#FBAE3C',
-    error: '#B00020',
+    error: '#e62000',
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00'
