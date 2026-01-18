@@ -86,10 +86,11 @@ watchEffect(() => {
               size="large"
               class="return-button"
               @click="$router.back()"
+              color="gray-100"
             />
           </template>
         </v-tooltip>
-        <h4 class="text-h5 font-weight-bold text-left ml-2">Edite su perfil</h4>
+        <h4 class="text-h5 font-weight-bold text-left ml-2 text-gray-100">Edite su perfil</h4>
       </div>
       <v-form class="profile-form" ref="form" @submit.prevent="validate">
         <div class="content-form">
@@ -206,7 +207,12 @@ watchEffect(() => {
 }
 
 .form-avatar {
-  border: 6px solid var(--vt-c-white);
+  border: 5px solid var(--gray-100);
+  background-color: lightgray;
+}
+
+.return-button .v-icon {
+  color: var(--gray-100);
 }
 
 .form-button {

@@ -21,6 +21,9 @@
   --primary-color: #ee5007;
   --background-color: #001220;
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --gray-100: #ededed;
+  --gray-200: #d6d6d6;
 }
 
 *,

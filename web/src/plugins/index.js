@@ -9,7 +9,9 @@ const myCustomTheme = {
     error: '#e62000',
     info: '#2196F3',
     success: '#4CAF50',
-    warning: '#FB8C00'
+    warning: '#FB8C00',
+    'gray-100': '#ededed',
+    'gray-200': '#d6d6d6'
   }
 }
 
