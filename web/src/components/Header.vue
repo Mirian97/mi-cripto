@@ -24,8 +24,8 @@ const showProfileButton = computed(() => router.currentRoute.value.path !== '/pe
       </RouterLink>
       <div class="d-flex align-center actions-buttons">
         <v-btn @click="navigateToProfile" v-if="showProfileButton" variant rounded>
-          <v-avatar v-if="user?.avatar_url" :image="user.avatar_url" size="28" />
-          <v-icon v-else icon="mdi-account-circle" size="28" />
+          <v-avatar v-if="user?.avatar_url" :image="user.avatar_url" size="30" />
+          <v-icon v-else icon="mdi-account-circle" size="30" />
         </v-btn>
         <v-btn @click="removeUser" variant="text" rounded>
           <v-icon icon="mdi-logout" size="28" />
